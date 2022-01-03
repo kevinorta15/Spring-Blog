@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Join</title>
+</head>
+<body>
+
+<h1 th:text="${n}"></h1>
+<h1 th:text="${random}"></h1>
+<h1 th:text="${message}"></h1>
+
+<h1></h1>
+
+<form action="/rolldice" method="post">
+    <input type="text" name="n" id="n" class="field" />
+    <button>Guess Now</button>
+</form>
+
+</body>
+</html>

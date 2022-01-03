@@ -23,7 +23,7 @@ return "Placeholder for individual posts of Id " + id;
 return "Placeholder for the create post form!";
     }
 
-    public String createPost(){
-
-    }
+//    public String createPost(){
+//
+//    }
 }
