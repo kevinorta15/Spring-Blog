@@ -42,4 +42,12 @@ public class PostController {
         return "redirect:/posts/show";
     }
 
+    @GetMapping("/posts/edit/{id}")
+    public String editPost(@PathVariable long id, Model model){
+        Post editPost = postDao.getById(id);
+        model.addAttribute("postToEdit", editPost);
+
+        return "posts/edit";
+    }
+
 }

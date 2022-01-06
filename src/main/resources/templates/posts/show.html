@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,11 +10,11 @@
     <p th:text="${post.getTitle()}"/>
     <p th:text="${post.getBody()}"/>
     <div style="display: flex">
-        <form action="">
-            <button>Edit</button>
-        </form>
-        <form th:action="@{'deletebyid/' + ${posts.getId()}}" method="post">
+        <form th:action="@'/deletebyid/' + ${posts.getId()}" method="post">
             <button type="submit">Delete</button>
+        </form>
+        <form th:action="@{'/posts/edit/' + ${posts.getId()}}" method="get">
+            <button type="submit">Edit</button>
         </form>
     </div>
 </div>
