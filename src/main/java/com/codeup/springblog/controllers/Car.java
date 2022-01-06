@@ -15,6 +15,9 @@ public class Car {
     @Column(nullable = false, length = 50)
     private String model;
 
+    @ManyToOne
+    private Owner carOwner;
+
     public long getId() {
         return id;
     }

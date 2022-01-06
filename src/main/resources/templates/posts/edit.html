@@ -6,9 +6,11 @@
 </head>
 <body>
 
-<form method="post">
-    <input th:value="${postToEdit.getTitle()}"> post Title
-    <input th:value="${postToEdit.getBody()}"> post Body
+<form action="/posts/edit" method="post">
+    <input name="postTitle" th:value="${postToEdit.getTitle()}"> post Title
+    <input name="postBody" th:value="${postToEdit.getBody()}"> post Body
+    <input name="postId" type="hidden" th:value="${postToEdit.getId()}">
+    <button type="submit">Submit Edit</button>
 </form>
 </body>
 </html>
