@@ -5,8 +5,18 @@
     <title>Title</title>
 </head>
 <body>
-
-    <p th:text="${post.title}"/>
-    <p th:text="${post.body}"/>
+<h1>All Posts:</h1>
+<div th:each="posts: ${posts}">
+    <p th:text="${post.getTitle()}"/>
+    <p th:text="${post.getBody()}"/>
+    <div style="display: flex">
+        <form action="">
+            <button>Edit</button>
+        </form>
+        <form th:action="@{'deletebyid/' + ${posts.getId()}}" method="post">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
