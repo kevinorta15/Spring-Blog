@@ -19,6 +19,10 @@ public class Post {
     @Column(nullable = false, length = 75)
     private String title;
 
+    @ManyToOne
+    @JoinColumn(name = "post_user_id")
+    private User postUser;
+
 //    public Post() {
 //
 //    }
@@ -45,5 +49,13 @@ public class Post {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public User getPostUser() {
+        return postUser;
+    }
+
+    public void setPostUser(User postUser) {
+        this.postUser = postUser;
     }
 }

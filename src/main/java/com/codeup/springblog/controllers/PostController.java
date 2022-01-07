@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao) {
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
-//    @GetMapping("/posts")
+
+    //    @GetMapping("/posts")
 //    @ResponseBody
 //    public String indexPosts() {
 //        return "Placeholder: index for posts";
@@ -21,18 +24,22 @@ public class PostController {
     @GetMapping("/posts/show")
     public String viewPosts(Model model) {
         model.addAttribute("posts", postDao.findAll());
+        model.addAttribute("user", userDao.findAll());
         return "posts/show";
     }
+@GetMapping("/posts/create")
+public String createPost(Model model){
+        model.addAttribute("post", new Post());
+        return "/posts/create";
+}
 
-    @GetMapping("/posts/create")
-    @ResponseBody
-    public String viewCreatePost() {
-        return "Placeholder for the create post form!";
+    @PostMapping("/posts/create")
+    public String viewCreatePost(@ModelAttribute Post post) {
+        post.setPostUser(userDao.getById(1L));
+        postDao.save(post);
+        return "redirect:/posts/show";
     }
 
-    public String createPost() {
-        return "";
-    }
 
 
 
@@ -52,7 +59,15 @@ public class PostController {
     }
 
     @PostMapping("/posts/edit")
-    public String saveEditPost(@RequestParam(name= "postTitle") String title, @RequestParam(name = "postBody") String postBody, @RequestParam(name = "postId") long id){
-        return "redirect:/posts";
+    public String saveEditPost(@RequestParam(name= "postTitle") String postTitle, @RequestParam(name = "postBody") String postBody, @RequestParam(name = "postId") long id){
+        Post postToEdit = postDao.getById(id);
+
+        postToEdit.setBody(postBody);
+        postToEdit.setTitle(postTitle);
+        ;
+
+        postDao.save(postToEdit);
+
+        return "redirect:/posts/show";
     }
 }
